@@ -3,7 +3,7 @@ import {MatDialog} from '@angular/material';
 import {Router} from '@angular/router';
 import {User} from './user';
 import { AuthenticationService } from '../authentication.service';
-import {FormGroup,FormBuilder,Validators, FormsModule} from '@angular/forms';
+import {FormGroup, FormBuilder, Validators, FormsModule, NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -17,13 +17,19 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
-  loginUser(user){
-
+  loginUser(myForm: NgForm){
+    let user: User = {
+      username: myForm.value.username,
+      password: myForm.value.password
+    };
+    user.username = myForm.value.username;
+    user.password = myForm.value.password;
+    console.log('user: ', user);
     this.authenticationService.loginUser(user).subscribe(data=>{
       console.log(data);
       this.router.navigateByUrl('/user-dashboard');
     },error=>{
-      this.router.navigateByUrl('');
+      this.router.navigateByUrl('/register');
 
     });
   }
