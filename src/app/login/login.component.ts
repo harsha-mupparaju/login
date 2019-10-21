@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
       console.log(data);
       this.router.navigateByUrl('/user-dashboard');
     },error=>{
-      this.router.navigateByUrl('');
+      this.router.navigateByUrl('/register');
 
     });
   }
